@@ -1,0 +1,54 @@
+{% from "bootstrap5/form.html" import render_form %}
+
+
+<body>
+    <!-- Treść strony -->
+    <div class="content">
+      {% include "header.html" %}
+
+      <header class="masthead">
+        <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="site-heading">
+                <h1>strona glowna</h1>
+                <span class="subheading"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      {% include "footer.html" %}
+      
+    </div>
+
+    <!-- Okno zmiany hasła -->
+    {% if show_password_change %}
+    <div class="password-change-overlay" id="passwordChangeOverlay">
+        <div class="password-change-box">
+            <h2>Wymagana zmiana hasła</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            {% if category == 'modal' %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        </div>
+    </div>
+    {% endif %}
+    <script>
+        // Zdarzenie kliknięcia przycisku "Zmień hasło"
+        document.getElementById("changePasswordBtn").addEventListener("click", function() {
+            // Ukrycie okna zmiany hasła po kliknięciu
+            document.getElementById("passwordChangeOverlay").style.display = "none";
+        });
+    </script>
+</body>
+</html>

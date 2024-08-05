@@ -1,0 +1,62 @@
+{% include "header.html" %}
+
+<header class="masthead">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+
+          <h1>Profil</h1>
+          <span class="subheading"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5 mb-4">Profil użytkownika</h1>
+    <a href="{{ url_for('edit_user', user_id=user.id) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ user.name}} {{user.last_name}}</h5>
+            <p class="card-text"><strong>Login:</strong> {{ user.login }}</p>
+            <p class="card-text"><strong>E-mail:</strong> {{ user.email }}</p>
+            <p class="card-text"><strong>Miasto:</strong> {{ user.city  }}</p>
+            <p class="card-text"><strong>Kod pocztowy:</strong> {{ user.postal_code }}</p>
+            <p class="card-text"><strong>Ulica:</strong> {{ user.street }}</p>
+            <p class="card-text"><strong>Numer domu: </strong>{{ user.street_number }}</p>
+            <p class="card-text"><strong>Numer mieszkania:</strong> {{ user.flat_number }}</p>
+            <p class="card-text"><strong>pesel:</strong> {{ user.pesel }}</p>
+            <p class="card-text"><strong>Data urodzenia:</strong> {{ user.birth_date }}</p>
+            <p class="card-text"><strong>Płeć:</strong>
+              {% if user.sex == 0 %}
+                  Mężczyzna
+              {% elif user.sex == 1 %}
+                  Kobieta
+              {% else %}
+                  Nieznana płeć
+              {% endif %}
+          </p>
+          <p class="card-text"><strong>Telefon:</strong> {{ user.phone }}</p>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% include "footer.html" %}

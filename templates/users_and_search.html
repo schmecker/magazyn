@@ -1,0 +1,66 @@
+{% include "header.html" %}
+
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Zarządzaj użytkownikami</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2 class="mt-5 mb-4">Lista użytkowników</h2>
+
+            <form action="{{ url_for('user_search') }}" method="GET" class="mb-4">
+                <div class="input-group">
+                    <select class="form-select" name="search_category">
+                        <option value="1">Login</option>
+                        <option value="2">E-mail</option>
+                        <option value="3">Imię i nazwisko</option>
+                    </select>
+                    <input type="text" name="query" class="form-control" placeholder="Wyszukaj...">
+                    <button type="submit" class="btn btn-primary">Szukaj</button>
+                </div>
+            </form>
+
+            <ul class="list-group">
+                {% for user in users %}
+                     {% if user.id != 1 %}
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Login:</strong> {{ user.login }}<br>
+                            <strong>Email:</strong> {{ user.email }}<br>
+                            <strong>Imię i nazwisko:</strong> {{ user.name }} {{ user.last_name }}
+                        </div>
+                        <div>
+                            <a href="{{ url_for('admin_passwordchange', user_id=user.id) }}" class="btn btn-outline-secondary btn-sm">Zmień hasło</a>
+                            <a href="{{ url_for('edit_user', user_id=user.id) }}" class="btn btn-outline-secondary btn-sm">Edytuj</a>
+                            <a href="#" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete('{{ url_for('user_delete', user_id=user.id) }}')">Usuń</a>
+                            <a href="{{ url_for('user_profile', user_id=user.id) }}" class="btn btn-outline-secondary btn-sm">Profil</a>
+                        </div>
+                    </li>
+                    {% endif %}
+
+                {% else %}
+                <li class="list-group-item">Brak użytkowników</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}
+
+<script>
+    function confirmDelete(url) {
+        if (confirm("Czy na pewno chcesz usunąć tego użytkownika?")) {
+            window.location.href = url;
+        }
+    }
+</script>

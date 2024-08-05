@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+    <link rel="stylesheet" href="path/to/styles.css">
+</head>
+<body>
+    <!-- Treść strony -->
+    <div class="content">
+      {% include "header.html" %}
+
+      <header
+        class="masthead">
+        <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="site-heading">
+                <h1>strona glowna</h1>
+                <span class="subheading"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      {% include "footer.html" %}
+      
+    </div>
+
+    <!-- Okno zmiany hasła -->
+    <div class="password-change-overlay">
+        <div class="password-change-box">
+            <h2>Wymagana zmiana hasła</h2>
+            <form action="{{ url_for('user_search') }}" method="POST">
+                <label for="new_password">Nowe hasło:</label>
+                <input type="password" id="new_password" name="new_password" required>
+                <button type="submit">Zmień hasło</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

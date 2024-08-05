@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Delete</title>
+    <!-- Add your CSS styles here -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<!-- Add your modal HTML structure here -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-message"></p>
+    </div>
+</div>
+
+<script>
+    // Get the flash message from the DOM
+    var flashMessage = "{{ get_flashed_messages()[0] }}";
+
+    // Check if flash message exists
+    if (flashMessage) {
+        // Display the modal
+        var modal = document.getElementById("myModal");
+        var modalMessage = document.getElementById("modal-message");
+        modal.style.display = "block";
+        modalMessage.innerHTML = flashMessage;
+
+        // Close the modal when the user clicks on the close button
+        var closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
